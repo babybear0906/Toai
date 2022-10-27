@@ -2,9 +2,9 @@
 {
     public class Transactions
     {
-        public string code;
-        public int date;
+        public string code = "";
+        public int day;
         public double amount;
-        public bool kind;
+        public string kind ="";
     }
 }

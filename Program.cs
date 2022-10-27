@@ -6,7 +6,7 @@ namespace Toai
     {
         static void Main(string[] args)
         {
-            
+
             var done = false;
             int menu;
             while (!done)
@@ -20,7 +20,7 @@ namespace Toai
                     menu = int.Parse(Console.ReadLine());
                     switch (menu)
                     {
-                        case 0: Operation();break;
+                        case 0: Operation(); break;
                         //case 0: done = true; break;
                         //case 1: QuestionOperation.CreateQuestions(); break;
                         //case 2: QuestionOperation.ReadQuestion(); break;
@@ -42,29 +42,49 @@ namespace Toai
 
         public static void Operation()
         {
-            var transactions = new List<Transactions>() {new Transactions() { code="123213",amount=100000, date= 10, kind= true } };
-            
-            var accounts = new List<Account>()
-            {
-                new Account()
-                { accNumber = "123123",
-                    balance = 100000,
-                    transactions = transactions
+            var transactions = new List<Transactions>() {
+                new Transactions() {
+                    code = "1234",
+                    amount = 100000,
+                    day = 10,
+                    kind = "W" },
+                new Transactions()
+                {
+                    code = "1235",
+                    amount = 100000,
+                    day = 10,
+                    kind = "D"
                 }
             };
-            foreach (var account in accounts)
+
+            var account = new Account()
             {
-                Console.WriteLine(account.accNumber);
-                Console.WriteLine(account.balance);
-                foreach (var transaction in account.transactions)
+                accNumber = "123123",
+                balance = 100000,
+                code = { "1234", "1235" },
+            };
+
+
+            Console.WriteLine("Account Number: " + account.accNumber);
+            Console.WriteLine("Account balance: " + account.balance);
+            Console.WriteLine("List Transaction: ");
+            foreach (var transactionCode in account.code)
+            {
+                
+                var codeTrans = from code in transactions
+                                where code.code.Equals(transactionCode)
+                                select code;
+                foreach (var transaction in codeTrans)
                 {
-                    Console.WriteLine(transaction.code);
-                    Console.WriteLine(transaction.amount);
-                    Console.WriteLine(transaction.date);
-                    Console.WriteLine(transaction.kind);
+                    Console.WriteLine("Transaction code: " + transaction.code);
+                    Console.WriteLine("Transaction date: " + transaction.day);
+                    Console.WriteLine("Transaction amount: " + transaction.amount);
+                    Console.WriteLine("Transaction kind: " + transaction.kind); 
                 }
 
             }
+
+
         }
     }
 }
